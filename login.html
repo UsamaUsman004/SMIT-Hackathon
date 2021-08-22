@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Login</title>
+
+</head>
+
+<body>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 text-center pt-2 bgImg">
+                <h2 class="font-weight-bold mt-5">Welcome to Online Food Delivery</h2>
+                <h5>Developed by <span class="font-weight-bold text-danger">Muhammad Osama</span></h5>
+                <img src="./images/bg.jpg" class="img-fluid p-5 mt-3 bgImg" alt="pc">
+            </div>
+
+
+            <div class="col-md-6 text-center pt-2 loginSec">
+                <h2 class="font-weight-bold mt-5 text-danger">Sign In</h2>
+                <h6 class="text-secondary mb-5">To Keep connected with us please login with your personal infos</h6>
+
+                <div class="form-check form-check-inline font-weight-bold">
+                    <label class="form-check-label" for="inlineRadio1">Sign In as :
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="user" value="User">
+                    <label class="form-check-label" for="inlineRadio1">User</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="admin"
+                        value="Restaurant">
+                    <label class="form-check-label" for="inlineRadio2">Restaurant</label>
+                </div>
+
+                <div class="px-5" style="height:40%;">
+                    <div class="input-group mb-3 px-5 pt-5">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text border-0 bg-light" id="basic-addon1"><i
+                                    class="fa fa-envelope"></i></span>
+                        </div>
+                        <input type="email" class="form-control border-0 bg-light form-control-lg" placeholder="Email"
+                            id="email">
+                    </div>
+
+                    <div class="input-group mb-4 px-5">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text border-0 bg-light" id="basic-addon1">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                        </div>
+
+                        <input type="password" class="form-control border-0 bg-light form-control-lg"
+                            placeholder="Password" id="password">
+                    </div>
+
+                    <div>
+                        <button type="submit" onclick="signin()"
+                            class="btn bg-danger text-white px-5 float-left mx-5">SIGN IN</button>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-link text-danger font-weight-bold float-right mr-5"
+                            data-toggle="modal" data-target="#SignUp">
+                            Dont Have Account? SignUp
+                        </button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade text-left" id="SignUp" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-white">
+                                    <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+                                    <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="name" class="mr-3">Sign-Up as : </label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="user-signup" value="User">
+                                            <label class="form-check-label" for="inlineRadio1">User</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="res-signup" value="Restaurant">
+                                            <label class="form-check-label" for="inlineRadio2">Restaurant</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="name">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text" class="form-control" id="country">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" id="city">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="uemail">Email address</label>
+                                        <input type="email" class="form-control" id="uemail">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="upass">Password</label>
+                                        <input type="password" class="form-control" id="upass">
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn bg-danger text-white btn-block"
+                                        onclick="signup()">SignUp</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="bg-light p-5">
+
+                    <small>
+                        - Or You can Continue with -
+                    </small>
+                    <div class="input-group my-3">
+                        <div class="input-group-prepend" style="margin-left:auto;">
+                            <span class="input-group-text  bg-white" id="basic-addon1"><i
+                                    class="fa fa-google"></i></span>
+                        </div>
+                        <button class="btn bg-danger text-white" type="button" style="margin-right: auto;"
+                            onclick="googleSignin()">Sign in with
+                            Google</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Script for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-database.js"></script>
+
+    <script src="firebase.js"></script>
+</body>
+
+<script src="app.js"></script>
+
+</html>
