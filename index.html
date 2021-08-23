@@ -36,7 +36,7 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="UserArea">
                     <li class="nav-item">
                         <button type="button" class="btn btn-outline-light m-2" type="button" data-bs-toggle="modal"
-                            data-bs-target="#cartDetails">
+                            data-bs-target="#cartDetails" style="display: none;" id="orderBtn">
                             <i class="fa fa-shopping-cart me-2" aria-hidden="true"></i>Order
                             <span class="badge bg-light text-danger ms-2" id="cartLength">0</span>
                         </button>
@@ -63,6 +63,7 @@
                                                 <th scope="col">Item Name</th>
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Delivery</th>
+                                                <th scope="col">Quantity</th>
                                                 <th scope="col">Status</th>
                                             </tr>
                                         </thead>

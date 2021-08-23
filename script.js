@@ -34,6 +34,9 @@ showUserProducts();
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+
+        document.getElementById('orderBtn').style.display="block";
+
         var current_user = JSON.parse(localStorage.getItem('currentUser'));
         var myHtml = `<li class="media nav-item ms-4 my-2">
                         <img class="rounded-circle mr-2" width="40"

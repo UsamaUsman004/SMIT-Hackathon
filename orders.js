@@ -18,6 +18,8 @@ function getData() {
                             <td>${order.items[i].itemCategory}</td>
                             <td>${order.items[i].itemAdmin }</td>
                             <td>${order.items[i].itemDelivery}</td>
+                            <td>${order.items[i].itemQuantity}</td>
+
                         </tr>`
 
         document.getElementById('orderItems').innerHTML += orderHTML
