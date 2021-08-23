@@ -16,30 +16,22 @@ function AddDish() {
         itemImage : null
     }
 
-
     firebase.storage().ref('images').child(`${itemImage.name}`).put(itemImage).then((snapshot) => {
         firebase.storage().ref('images').child(`${itemImage.name}`).getDownloadURL()
             .then((url) => {             
                 productItem.itemImage = url;
                 firebase.database().ref('Products').push(productItem);
-
-                console.log('SuccessFully Done')
+                console.log('SuccessFully Done');
+                window.location.reload();
             })
             .catch((error) => {
                 console.log(error)
             });
     })
-
-    // console.log(itemImage);
 }
 
 
-// function showProducts() {
-//     console.log(document.getElementById('productTable').innerHTML);
-// }
-
 showProducts();
-//Fetch Data From Firebase
 
 
 //Fetch Data From Firebase
@@ -49,13 +41,6 @@ function showProducts() {
         snapshot.forEach((childSnapshot) => {
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
-
-            // var objkey = Object.keys(childData)
-            // var total_questions = objkey.length;
-            // console.log(total_questions);
-
-            // console.log(childData)
-            
 
             var genHTML = ` <tr>
                                 <th scope="row">${childKey}</th>
@@ -70,13 +55,10 @@ function showProducts() {
                             </tr>`;
 
             document.getElementById('productTable').innerHTML += genHTML;
-
         });
     });
 }
 
-
-// var mydata = [];
 
 function showOrders() {
     var myref = firebase.database().ref('orders');
@@ -85,16 +67,7 @@ function showOrders() {
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
 
-
-            console.log(childData);
-
             localStorage.setItem(childKey, JSON.stringify(childData));
-
-            // mydata = childData;
-
-            // console.log(childData.customerName);
-            // var myItem = JSON.stringify(childData.items)
-            
 
             var orderHTML = ` <div class="col-md-6">
                             <div class="card my-5">
@@ -106,7 +79,6 @@ function showOrders() {
                                 <button type="button" onclick='displayItems("${childKey}")' class="btn btn-danger">
                                         View Details
                                 </button>
-
                                 </div></div></div>
                                 `;
 
@@ -114,53 +86,21 @@ function showOrders() {
         });
     });
 }
-// displayItems(${myItem},"${childKey}")
+
 showOrders();
 
 function displayItems(childKey) {
-
     var url = 'orderDetails.html?data='+childKey;
     window.open(url, '_blank').focus();
-    // console.log('working')
 
-    // for (let i = 0; i < e.length; i++) {
-    //     var genItems = `<tr>
-    //     <th scope="row">${e[i].itemName}</th>
-    //     <td>${e[i].itemPrice}</td>
-    //     <td>${e[i].itemCategory}</td>
-    //     <td>${e[i].itemDelivery}</td>
-    // </tr>`
-    //     // console.log(people[i].first_name);
-    //     document.getElementById('orderFoods' + `${key}`).innerHTML += genItems;
-    // }
-
-    // // console.log(document.getElementById(`orderFoods${key}`).innerHTML)
-    // console.log(e.length);
-    // console.log(key)
 }
 
-// function displayFood(e) {
 
-//     // var myItem = JSON.stringify(e)
-//     // var foodHTML = document.getElementById('orderFoods').innerHTML;for (var i = 0; i < childData.length; i++) {
-//     var foodHTML = `<tr>
-//                 <th scope="row">${childData.itemCategory}</th>
-//                 <td>Mark</td>
-//                 <td>Otto</td>
-//                 <td>@mdo</td>
-//             </tr>`
-
-//     document.getElementById('orderFoods').innerHTML += foodHTML;
-// }
-
-
-// console.log(e);
-// }
 function logOut() {
     localStorage.clear()
     firebase.auth().signOut().then(() => {
         window.location.replace('login.html');
     }).catch((error) => {
-        // An error happened.
+        console.log(error)
     });
 }

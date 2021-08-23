@@ -29,8 +29,6 @@ function signin() {
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                // console.log(user)
-
                 var { displayName, email, phoneNumber, photoURL } = user;
                 setUser(displayName, email, phoneNumber, photoURL);
                 window.location.replace('admin.html');
@@ -48,7 +46,6 @@ function signin() {
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                // console.log(user)
 
                 var { displayName, email, phoneNumber, photoURL } = user;
                 setUser(displayName, email, phoneNumber, photoURL);
@@ -64,10 +61,6 @@ function signin() {
     else {
         alert('Please Select a Role...');
     }
-
-    // //Setting the fields to be empty
-    // document.getElementById('email').value = '';
-    // document.getElementById('password').value = '';
 }
 
 function signup() {
@@ -104,8 +97,6 @@ function signup() {
             console.log(errorMessage);
         });
 
-
-
     //Setting the fields to be empty    
     document.getElementById('uemail').value = '';
     document.getElementById('upass').value = '';
@@ -117,7 +108,6 @@ function signup() {
 
 
 function setRole(name, country, city, email, role) {
-    // var database = firebase.database();
     var currentRole = {
         name: name,
         country: country,
@@ -141,22 +131,7 @@ function setRole(name, country, city, email, role) {
 function setUser(displayName, email, phoneNumber, photoURL) {
     var user = { displayName, email, phoneNumber, photoURL };
     localStorage.setItem('currentUser', JSON.stringify(user));
-    // alert('Working')
 }
-
-
-
-
-
-// let allCarts = [];
-// let carts = localStorage.getItem('carts');
-
-
-// if (carts !== null) {
-//     allCarts = JSON.parse(carts);
-//     let cart_badge = document.getElementById('cartLength');
-//     cart_badge.innerHTML = allCarts.length
-// }
 
 function placeOrder() {
 
@@ -169,8 +144,6 @@ function placeOrder() {
     }
 
     firebase.database().ref('orders').push(order);
-    // console.log(typeof allCarts);
-    // localStorage.clear();
     localStorage.removeItem('carts');
     window.location.reload();
 }

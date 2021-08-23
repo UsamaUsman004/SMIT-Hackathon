@@ -36,8 +36,6 @@ function displayCarts() {
 
 displayCarts();
 
-// var data = JSON.parse(localStorage.getItem('item'));
-// console.log(data);
 
 
 

@@ -9,9 +9,6 @@ function getData() {
     document.getElementById('customer').innerHTML += order.customerName.email;
 
     console.log(order.items)
-    // console.log(order_id)
-
-    // console.log(document.getElementById('orderItems').innerHTML);
 
     for (var i = 0; i < order.items.length; i++) {
         var orderHTML = `<tr>
@@ -25,25 +22,6 @@ function getData() {
 
         document.getElementById('orderItems').innerHTML += orderHTML
     }
-
-
-
-
-    // var obj = Object.keys(question);
-    // console.log(obj.length);
-
-
-    // for (var i = 0; i < obj.length; i++) {
-    //     var objInd = obj[i];
-    //     questionsArray.push(question[objInd]);
-    // }
-    // console.log(questionsArray);
-
-
-    // // Display Total Count of Questions
-    // var qCount = document.getElementById('questionCount');
-    // qCount.innerHTML = questionsArray.length;
-
 }
 
 getData();

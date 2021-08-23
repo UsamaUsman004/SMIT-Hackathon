@@ -1,17 +1,9 @@
-
-
 function showUserProducts() {
     var myref = firebase.database().ref('Products');
     myref.on('value', (snapshot) => {
         snapshot.forEach((childSnapshot) => {
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
-
-            // var objkey = Object.keys(childData)
-            // var total_questions = objkey.length;
-            // console.log(total_questions);
-
-            // console.log(childData)
 
             var { itemAdmin, itemCategory, itemDelivery, itemName, itemPrice, itemImage } = childData
 
@@ -23,6 +15,7 @@ function showUserProducts() {
                                     <div class="card-body">
                                         <h5 class="card-title">${itemName}</h5>
                                         <p class="card-text">${itemCategory} - Rs. ${itemPrice} </p>
+                                        <p class="card-text text-muted">Restaurant -  ${itemAdmin} </p>
                                         <button  onclick="addToCart('${itemAdmin}','${itemName}','${itemCategory}','${itemDelivery}','${itemPrice}')"  class="btn btn-danger">Order Item</button>
                                     </div>
                                 </div>
@@ -40,14 +33,8 @@ showUserProducts();
 
 
 firebase.auth().onAuthStateChanged(function (user) {
-    // var myHtml = document.getElementById('UserArea').innerHTML ;
-
     if (user) {
-
         var current_user = JSON.parse(localStorage.getItem('currentUser'));
-        // console.log(current_user);
-
-
         var myHtml = `<li class="media nav-item ms-4 my-2">
                         <img class="rounded-circle mr-2" width="40"
                             src="https://i.pinimg.com/236x/91/7c/38/917c386c14a06f567a86b72fb4994143.jpg">
