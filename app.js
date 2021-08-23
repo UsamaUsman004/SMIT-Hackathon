@@ -86,9 +86,12 @@ function signup() {
             var user = userCredential.user;
             if (urole.checked) {
                 setRole(name, country, city, email, urole.value)
+                alert("Successfully Sign Up");
             }
             else if (restaurantRole.checked) {
-                setRole(name, country, city, email, restaurantRole.value)
+                setRole(name, country, city, email, restaurantRole.value);
+                alert("Successfully Sign Up");
+
             }
             else {
                 alert('Please Select a Role...');
