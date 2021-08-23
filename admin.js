@@ -76,7 +76,8 @@ function showProducts() {
 }
 
 
-var mydata = [];
+// var mydata = [];
+
 function showOrders() {
     var myref = firebase.database().ref('orders');
     myref.on('value', (snapshot) => {
@@ -87,10 +88,12 @@ function showOrders() {
 
             console.log(childData);
 
-            mydata = childData;
+            localStorage.setItem(childKey, JSON.stringify(childData));
 
-            console.log(childData.customerName);
-            var myItem = JSON.stringify(childData.items)
+            // mydata = childData;
+
+            // console.log(childData.customerName);
+            // var myItem = JSON.stringify(childData.items)
             
 
             var orderHTML = ` <div class="col-md-6">
@@ -100,77 +103,40 @@ function showOrders() {
                                 <h6 class="card-subtitle mb-2 text-muted">${childKey}</h6>
                                 <p class="card-text">Customer Email : ${childData.customerName.email}</p>
                                 <p class="card-text">Total Items : ${childData.items.length}</p>
-
-                                
-
-                                <!-- Button trigger modal -->
-
-                                    <button type="button" onclick='displayItems(${myItem},"${childKey}")' class="btn btn-danger" data-toggle="modal" data-target="#orderDetails">
+                                <button type="button" onclick='displayItems("${childKey}")' class="btn btn-danger">
                                         View Details
-                                    </button>
+                                </button>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="orderDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                                <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <th scope="col">Item Name</th>
-                                                    <th scope="col">Item Price</th>
-                                                    <th scope="col">Item Category</th>
-                                                    <th scope="col">Item Delivery</th>
-                                                </tr>
-                                                </thead>
-
-                                            
-                                                <tbody id="orderFoods${childKey}" >
-                                                
-                                                </tbody>
-
-
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                              </div>
-                            </div>
-            </div>`;
+                                </div></div></div>
+                                `;
 
             document.getElementById('orderTable').innerHTML += orderHTML;
         });
     });
 }
-
+// displayItems(${myItem},"${childKey}")
 showOrders();
 
-function displayItems(e, key) {
+function displayItems(childKey) {
 
-    for (let i = 0; i < e.length; i++) {
-        var genItems = `<tr>
-        <th scope="row">${e[i].itemName}</th>
-        <td>${e[i].itemPrice}</td>
-        <td>${e[i].itemCategory}</td>
-        <td>${e[i].itemDelivery}</td>
-    </tr>`
-        // console.log(people[i].first_name);
-        document.getElementById('orderFoods' + `${key}`).innerHTML += genItems;
-    }
+    var url = 'orderDetails.html?data='+childKey;
+    window.open(url, '_blank').focus();
+    // console.log('working')
 
-    // console.log(document.getElementById(`orderFoods${key}`).innerHTML)
-    console.log(e.length);
-    console.log(key)
+    // for (let i = 0; i < e.length; i++) {
+    //     var genItems = `<tr>
+    //     <th scope="row">${e[i].itemName}</th>
+    //     <td>${e[i].itemPrice}</td>
+    //     <td>${e[i].itemCategory}</td>
+    //     <td>${e[i].itemDelivery}</td>
+    // </tr>`
+    //     // console.log(people[i].first_name);
+    //     document.getElementById('orderFoods' + `${key}`).innerHTML += genItems;
+    // }
+
+    // // console.log(document.getElementById(`orderFoods${key}`).innerHTML)
+    // console.log(e.length);
+    // console.log(key)
 }
 
 // function displayFood(e) {
