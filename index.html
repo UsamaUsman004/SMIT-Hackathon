@@ -34,15 +34,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="UserArea">
-
-
-                   
-
-
-
-                    
-
-
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-light m-2" type="button" data-bs-toggle="modal"
+                            data-bs-target="#cartDetails">
+                            <i class="fa fa-shopping-cart me-2" aria-hidden="true"></i>Order
+                            <span class="badge bg-light text-danger ms-2" id="cartLength">0</span>
+                        </button>
+                    </li>
                 </ul>
 
 
@@ -69,14 +67,15 @@
                                             </tr>
                                         </thead>
                                         <tbody id="cartBody">
-                                            
+
                                         </tbody>
                                     </table>
                                 </div>
                                 ...
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="placeOrder()">Submit Order</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                    onclick="placeOrder()">Submit Order</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -114,7 +113,7 @@
 
         <div class="container my-5">
             <div class="row" id="userProducts">
-
+                
 
             </div>
         </div>
@@ -181,8 +180,12 @@
     <script src="firebase.js"></script>
 
     <!-- Custom JS  -->
+    
     <script src="app.js"></script>
+    <!-- <script src="auth.js"></script> -->
     <script src="cart.js"></script>
+    <script src="script.js"></script>
+
 
     <!-- AOS Script  -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

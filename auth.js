@@ -38,8 +38,6 @@ function signin() {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                alert(errorMessage);
-
             });
     }
 
@@ -57,8 +55,6 @@ function signin() {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                alert(errorMessage);
-
             });
     }
     else {
@@ -98,7 +94,6 @@ function signup() {
         .catch((error) => {
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log(errorMessage);
         });
 
 
@@ -140,44 +135,3 @@ function setUser(displayName, email, phoneNumber, photoURL) {
     localStorage.setItem('currentUser', JSON.stringify(user));
     // alert('Working')
 }
-
-
-
-
-
-// let allCarts = [];
-// let carts = localStorage.getItem('carts');
-
-
-// if (carts !== null) {
-//     allCarts = JSON.parse(carts);
-//     let cart_badge = document.getElementById('cartLength');
-//     cart_badge.innerHTML = allCarts.length
-// }
-
-function placeOrder() {
-
-    var customer = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(customer)
-
-    var order ={
-        customerName : customer,
-        items :allCarts
-    }
-
-    firebase.database().ref('orders').push(order);
-    // console.log(typeof allCarts);
-    // localStorage.clear();
-    localStorage.removeItem('carts');
-    window.location.reload();
-}
-
-function logOut() {
-    localStorage.clear()
-    firebase.auth().signOut().then(() => {
-        window.location.reload()
-    }).catch((error) => {
-        // An error happened.
-    });
-}
-

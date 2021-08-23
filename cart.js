@@ -15,6 +15,7 @@ function addToCart(itemAdmin, itemName, itemCategory, itemDelivery, itemPrice) {
 
     allCarts.push(itemObj)
     localStorage.setItem('carts', JSON.stringify(allCarts))
+    window.location.reload();
 
 }
 
@@ -35,8 +36,8 @@ function displayCarts() {
 
 displayCarts();
 
-var data = JSON.parse(localStorage.getItem('item'));
-console.log(data);
+// var data = JSON.parse(localStorage.getItem('item'));
+// console.log(data);
 
 
 

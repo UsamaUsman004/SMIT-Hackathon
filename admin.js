@@ -3,6 +3,7 @@ function AddDish() {
     var itemPrice = document.getElementById('price').value;
     var itemCategory = document.getElementById('category').value;
     var itemDelivery = document.getElementById('delivery').value;
+    var itemImage = document.getElementById('dishImg').files[0];
 
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -12,9 +13,24 @@ function AddDish() {
         itemPrice: itemPrice,
         itemCategory: itemCategory,
         itemDelivery: itemDelivery,
+        itemImage : null
     }
 
-    firebase.database().ref('Products').push(productItem);
+
+    firebase.storage().ref('images').child(`${itemImage.name}`).put(itemImage).then((snapshot) => {
+        firebase.storage().ref('images').child(`${itemImage.name}`).getDownloadURL()
+            .then((url) => {             
+                productItem.itemImage = url;
+                firebase.database().ref('Products').push(productItem);
+
+                console.log('SuccessFully Done')
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    })
+
+    // console.log(itemImage);
 }
 
 
@@ -39,9 +55,14 @@ function showProducts() {
             // console.log(total_questions);
 
             // console.log(childData)
+            
 
             var genHTML = ` <tr>
                                 <th scope="row">${childKey}</th>
+                                <td> <div class="media">
+                                        <img src="${childData.itemImage}" class="mr-3" alt="..." width="100">
+                                    </div>
+                              </td>
                                 <td>${childData.itemName}</td>
                                 <td>${childData.itemCategory}</td>
                                 <td>${childData.itemDelivery}</td>
@@ -62,30 +83,24 @@ function showOrders() {
         snapshot.forEach((childSnapshot, i) => {
             var childKey = childSnapshot.key;
             var childData = childSnapshot.val();
+
+
             console.log(childData);
 
             mydata = childData;
 
-            // console.log(childData.length);
-            var myItem = JSON.stringify(childData)
-            // console.log(myItem);
-
-            // var items = '';
-            // for (var i = 0; i < childData.length; i++) {
-            //     items += `<tr>
-            //             <th scope="row">${childData[i].itemAdmin}</th>
-            //             <td>Mark</td>
-            //             <td>Otto</td>
-            //             <td>@mdo</td>
-            //         </tr>`
-            // }
+            console.log(childData.customerName);
+            var myItem = JSON.stringify(childData.items)
+            
 
             var orderHTML = ` <div class="col-md-6">
                             <div class="card my-5">
                                 <div class="card-body">
                                 <h5 class="card-title">Order ID:</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">${childKey}</h6>
-                                <p class="card-text">Total Items : ${childData.length}</p>
+                                <p class="card-text">Customer Email : ${childData.customerName.email}</p>
+                                <p class="card-text">Total Items : ${childData.items.length}</p>
+
                                 
 
                                 <!-- Button trigger modal -->
@@ -175,11 +190,11 @@ function displayItems(e, key) {
 
 // console.log(e);
 // }
-function logOut(){
+function logOut() {
     localStorage.clear()
     firebase.auth().signOut().then(() => {
         window.location.replace('login.html');
-      }).catch((error) => {
+    }).catch((error) => {
         // An error happened.
-      });
+    });
 }
