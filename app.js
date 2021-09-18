@@ -29,9 +29,22 @@ function signin() {
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                var { displayName, email, phoneNumber, photoURL } = user;
-                setUser(displayName, email, phoneNumber, photoURL);
-                window.location.replace('admin.html');
+
+                var myref = firebase.database().ref('Restaurant');
+                myref.on('value', (snapshot) => {
+                    snapshot.forEach((childSnapshot) => {
+                        var childKey = childSnapshot.key;
+                        var childData = childSnapshot.val();
+
+                        if (user.email === childData.email) {
+                            setUser(childData.email, childData.city, childData.country, childData.name);
+                            window.location.replace('admin.html');
+                        }
+                        else {
+                            console.log('Nahi Hai');
+                        }
+                    });
+                });
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -47,15 +60,26 @@ function signin() {
                 // Signed in
                 var user = userCredential.user;
 
-                var { displayName, email, phoneNumber, photoURL } = user;
-                setUser(displayName, email, phoneNumber, photoURL);
-                window.location.replace('index.html');
+                var myref = firebase.database().ref('User');
+                myref.on('value', (snapshot) => {
+                    snapshot.forEach((childSnapshot) => {
+                        var childKey = childSnapshot.key;
+                        var childData = childSnapshot.val();
+
+                        if (user.email === childData.email) {
+                            setUser(childData.email, childData.city, childData.country, childData.name);
+                            window.location.replace('index.html');
+                        }
+                        else {
+                            console.log('Nahi Hai');
+                        }
+                    });
+                });
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 alert(errorMessage);
-
             });
     }
     else {
@@ -128,25 +152,13 @@ function setRole(name, country, city, email, role) {
 }
 
 
-function setUser(displayName, email, phoneNumber, photoURL) {
-    var user = { displayName, email, phoneNumber, photoURL };
+function setUser(email, city, country, name) {
+    var user = { email, city, country, name };
+    console.log(user);
     localStorage.setItem('currentUser', JSON.stringify(user));
 }
 
-function placeOrder() {
 
-    var customer = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(customer)
-
-    var order ={
-        customerName : customer,
-        items :allCarts
-    }
-
-    firebase.database().ref('orders').push(order);
-    localStorage.removeItem('carts');
-    window.location.reload();
-}
 
 function logOut() {
     localStorage.clear()

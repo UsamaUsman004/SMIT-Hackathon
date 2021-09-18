@@ -1,7 +1,6 @@
 let allCarts = [];
 let carts = localStorage.getItem('carts');
 
-
 if (carts !== null) {
     allCarts = JSON.parse(carts);
     let cart_badge = document.getElementById('cartLength');
@@ -10,28 +9,35 @@ if (carts !== null) {
 
 
 // Reducing the data by removing duplications
-// let myRedItems = carts.reduce(function (accumulator, currentElement) {
-//     let index = accumulator.findIndex(item => item.key == currentElement.key)
-//     if (index >= 0) {
-//         accumulator[index].quantity += 1
-//         return [...accumulator]
-//     } else {
-//         return [...accumulator, { ...currentElement, quantity: 1 }]
-//     }
-//     return accumulator
-// }, [])
+let myRedItems = allCarts.reduce(function (accumulator, currentElement) {
+    let index = accumulator.findIndex(item => item.itemKey == currentElement.itemKey)
+    if (index >= 0) {
+        accumulator[index].itemQuantity += 1
+        return [...accumulator]
+    } else {
+        return [...accumulator, { ...currentElement, itemQuantity: 1 }]
+    }
+    return accumulator
+}, [])
 
 
 
+let getItems = (items, id) => items.filter(item => item.id == id).map(item => { return { itemCategory: item.itemCategory,itemName: item.itemName, itemPrice: item.itemPrice, itemDelivery: item.itemDelivery, itemAdmin: item.itemAdmin, itemQuantity: item.itemQuantity } })
 
-function addToCart(itemAdmin, itemName, itemCategory, itemDelivery, itemPrice) {
+var reduceData = getItems(myRedItems, allCarts.itemKey);
+// console.log(mydata.length)
+
+// console.log(reduceData)
+
+function addToCart(itemKey, itemAdmin, itemName, itemCategory, itemDelivery, itemPrice) {
     var itemObj = {
+        itemKey: itemKey,
         itemAdmin: itemAdmin,
         itemName: itemName,
         itemCategory: itemCategory,
         itemDelivery: itemDelivery,
         itemPrice: itemPrice,
-        itemQuantity: 1
+        itemQuantity: 1,
     }
 
     allCarts.push(itemObj)
@@ -41,35 +47,14 @@ function addToCart(itemAdmin, itemName, itemCategory, itemDelivery, itemPrice) {
 }
 
 
-// let getItems = (items, id) => items.filter(item => item.id == id).map(item => { return { itemName: item.itemName, itemPrice: item.itemPrice, itemDelivery: item.itemDelivery, itemQuantity: item.itemQuantity } })
-
-// var reduceData = getItems(myRedItems, carts.itemName);
-// console.log(mydata.length)
-
-
-// for (let i = 0; i < reduceData.length; i++) {
-//     var tableData = `<tr>
-//                                     <th scope="row">${i + 1}</th>
-//                                     <td>${reduceData[i].itemName}</td>
-//                                     <td>${reduceData[i].itemPrice}</td>
-//                                     <td>${reduceData[i].itemDelivery}</td>
-//                                     <td>${reduceData[i].itemQuantity}</td>
-//                                     <td>Status</td>
-//                                 </tr>`
-
-//     document.getElementById('cartBody').innerHTML += tableData;
-// }
-
-
 function displayCarts() {
-    for (let i = 0; i < allCarts.length; i++) {
+    for (let i = 0; i < reduceData.length; i++) {
         var cartHTML = ` <tr>
                                 <th scope="row">${i + 1}</th>
-                                <td>${allCarts[i].itemName}</td>
-                                <td>${allCarts[i].itemPrice}</td>
-                                <td>${allCarts[i].itemDelivery}</td>
-                                <td>${allCarts[i].itemQuantity}</td>
-                                <td>Status</td>
+                                <td>${reduceData[i].itemName}</td>
+                                <td>${reduceData[i].itemPrice}</td>
+                                <td>${reduceData[i].itemDelivery}</td>
+                                <td>${reduceData[i].itemQuantity}</td>
                             </tr>`;
 
         document.getElementById('cartBody').innerHTML += cartHTML;
@@ -77,6 +62,27 @@ function displayCarts() {
 }
 
 displayCarts();
+
+function placeOrder() {
+
+    var customer = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(customer)
+
+    var order ={
+        customerName : customer,
+        items :reduceData,
+        quantity : allCarts.length,
+        status : 'accepted'
+    }
+
+    // console.log(order)
+
+    firebase.database().ref('orders').push(order);
+    localStorage.removeItem('carts');
+    window.location.reload();
+}
+
+
 
 
 

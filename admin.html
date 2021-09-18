@@ -26,7 +26,7 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger" >
         <a class="navbar-brand" href="#">Online Food Delivery - Admin</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto" id="navBar">
 
                 <li class="nav-item">
                     <button class="btn btn-light m-2" type="button" data-toggle="modal" data-target="#AddDishes">
@@ -42,6 +42,7 @@
                     </button>
                 </li>
 
+            
                 <li class="nav-item">
                     <button class="btn btn-light m-2" type="button" onclick="logOut()">Log Out</button>
                 </li>
@@ -114,17 +115,10 @@
                         href="#v-pills-products" role="tab" aria-controls="v-pills-products"
                         aria-selected="true">Products</a>
 
-                    <a class="nav-link text-danger" id="v-pills-accepted-tab" data-toggle="pill"
-                        href="#v-pills-accepted" role="tab" aria-controls="v-pills-accepted"
-                        aria-selected="false">Accepted</a>
+                    <a class="nav-link text-danger" id="v-pills-orders-tab" data-toggle="pill"
+                        href="#v-pills-orders" role="tab" aria-controls="v-pills-orders"
+                        aria-selected="false">Orders</a>
 
-                    <a class="nav-link text-danger" id="v-pills-rejected-tab" data-toggle="pill"
-                        href="#v-pills-rejected" role="tab" aria-controls="v-pills-rejected"
-                        aria-selected="false">Rejected</a>
-
-                    <a class="nav-link text-danger" id="v-pills-delievered-tab" data-toggle="pill"
-                        href="#v-pills-delievered" role="tab" aria-controls="v-pills-delievered"
-                        aria-selected="false">Delievered</a>
                 </div>
             </div>
 
@@ -153,62 +147,14 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane fade" id="v-pills-accepted" role="tabpanel"
-                        aria-labelledby="v-pills-accepted-tab">
+
+                    
+                    <div class="tab-pane fade" id="v-pills-orders" role="tabpanel"
+                        aria-labelledby="v-pills-orders-tab">
                         <div class="container">
                             <div class="row" id="orderTable">
 
                             </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-rejected" role="tabpanel"
-                        aria-labelledby="v-pills-rejected-tab">
-                        <div class="container">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Delivery</th>
-                                        <th scope="col">Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>@twitter</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-delievered" role="tabpanel"
-                        aria-labelledby="v-pills-delievered-tab">
-                        <div class="container">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Delivery</th>
-                                        <th scope="col">Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>@twitter</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
